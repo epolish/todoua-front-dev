@@ -1,0 +1,25 @@
+<nav class="navbar-fixed-top">
+  <ng2-slim-loading-bar [color]="'royalblue'" [height]="'2px'"></ng2-slim-loading-bar>
+</nav>
+<div class="container">
+  <header class="row">
+    <div class="col-xs-12">
+      <p class="title">simple todo lists</p>
+      <p class="sub-title">from ruby garage</p>
+    </div>
+  </header>
+  <section class="row projects">
+    <div class="col-md-8 col-xs-12 col-md-offset-2">
+      <ng-template #projectContainer></ng-template>
+      <div class="row add-project" (click)="addProject()">
+        <div class="col-xs-12">
+          <img alt="shedule-icon" src="{{imagePath + 'icons/blue-plus.fw.png'}}">
+          <span>Add TODO List</span>
+        </div>
+      </div>
+    </div>
+  </section>
+  <footer class="row">
+    <div class="col-xs-12">&copy; Ruby Garage</div>
+  </footer>
+</div>

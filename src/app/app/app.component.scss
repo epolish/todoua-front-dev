@@ -1,0 +1,60 @@
+@import "~variables.scss";
+
+header.row {
+  height: 30vh;
+  text-align: center;
+  padding: $topOffset;
+  text-transform: uppercase;
+  text-shadow: 0px 1px white;
+  p.title {
+    margin: 0;
+    font-size: 30px;
+    font-weight: bold;
+  }
+  p.sub-title {
+    font-size: 20px;
+  }
+}
+section {
+  div.row.add-project {
+    width: 33%;
+    margin: 0 auto;
+    cursor: pointer;
+    margin-top: 10%;
+    overflow: hidden;
+    border-radius: 3px;
+    background: $blueGradient;
+    min-height: $projectNameDivHeight;
+    div {
+      height: 100%;
+      color: white;
+      font-size: 20px;
+      font-weight: bold;
+      text-align: center;
+      padding: 4% 5% 5% 7%;
+      text-shadow: 0px 1px black;
+      background-image: $noiseTextureImage;
+      &:hover {
+        box-shadow: inset 0 0 10px $dimmedBlueColor;
+      }
+      &:active {
+        box-shadow: inset 0 0 25px $dimmedBlueColor;
+      }
+      img {
+        float: left;
+        margin-top: 0.75vh;
+      }
+    }
+  }
+}
+footer.row {
+  color: white;
+  text-align: center;
+  margin-bottom: 5vh;
+  margin-top: $topOffset;
+}
+@media only screen and (max-width : $screenXsMin) {
+  section {
+    display: none;
+  }
+}

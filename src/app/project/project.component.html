@@ -1,0 +1,103 @@
+<div class="row project"
+  *ngIf="show"
+  @flyInOut
+>
+  <div class="col-xs-12">
+    <div class="noise-background">
+      <div class="row name">
+        <div class="col-xs-1 shedule-icon">
+          <img alt="shedule-icon" src="{{iconPath + 'icon.fw.png'}}">
+        </div>
+        <div class="col-xs-8 text" contenteditable="true"
+          #focusableProject
+          [textContent]="project.name"
+          (blur)="completeProjectEditing($event.target.textContent)"
+        ></div>
+        <div class="col-xs-3 controls">
+          <img alt="shedule-icon" src="{{iconPath + 'trash.fw.png'}}"
+            (click)="deleteProject()"
+          >
+          <img alt="shedule-icon" src="{{iconPath + 'pencil.fw.png'}}"
+            (click)="focusElement(focusableProject)"
+          >
+        </div>
+      </div>
+    </div>
+    <div class="row add">
+      <div class="col-xs-1 green-plus-icon">
+        <img alt="shedule-icon" src="{{iconPath + 'green-plus.fw.png'}}">
+      </div>
+      <div class="col-xs-9">
+          <div class="input-group name">
+            <input type="text" class="form-control" placeholder="Start typing here to create a task..."
+              #taskName
+              (keyup.enter)="createTask(taskName.value); taskName.value=''"
+            >
+          </div>
+      </div>
+      <div class="col-xs-2">
+        <div class="input-group">
+          <input type="hidden">
+          <div class="input-group-btn">
+            <button class="btn btn-default" type="submit"
+              (click)="createTask(taskName.value); taskName.value=''"
+            >Add Task</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row tasks">
+      <ul class="col-xs-12 sortable"
+        #zone
+        dnd-sortable-container
+        [sortableData]="project.tasks"
+        [dropZones]=[zone]
+      >
+        <li class="row task"
+          *ngFor="let task of project.tasks; let i = index"
+          @flyInOut
+          dnd-sortable
+          [sortableIndex]="i"
+          [dragData]="task"
+          (onDropSuccess)="droppedSuccess($event, i+1)"
+        >
+          <div class="col-xs-1 status">
+            <label>
+              <input type="checkbox"
+                [(ngModel)]="task.status"
+                (ngModelChange)="updateTask(task)"
+              >
+              <span></span>
+            </label>
+          </div>
+          <div class="col-xs-9 task-title">
+            <div class="input-group name" contenteditable="true"
+              #focusableTask
+              [textContent]="task.name"
+              (blur)="updateTaskName(task, $event.target.textContent)"
+            ></div>
+            <div class="input-group date">
+              <input type="date"
+                [(ngModel)]="task.expires"
+                (ngModelChange)="updateTask(task)"
+              >
+            </div>
+          </div>
+          <div class="col-xs-2 controls"
+            dnd-sortable-handle
+            (mousedown)="disabled=true"
+            (mouseup)="disabled=false"
+          >
+            <img alt="shedule-icon" src="{{iconPath + 'updown.svg'}}">
+            <img alt="shedule-icon" src="{{iconPath + 'pencil.svg'}}"
+              (click)="focusElement(focusableTask)"
+            >
+            <img alt="shedule-icon" src="{{iconPath + 'trash.svg'}}"
+              (click)="deleteTask(task)"
+            >
+          </div>
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>
